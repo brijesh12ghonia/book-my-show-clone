@@ -70,7 +70,7 @@ const Navbar = () => {
             <div className="hidden md:flex lg:hidden">
                 <NavMedium />
             </div>
-            <div className="hidden md:hidden lg:flex">
+            <div className="hidden w-full lg:flex">
                 <NavLarge />
             </div>
         </nav>

@@ -38,7 +38,7 @@ const NavLarge = () => {
                     <span className="text-gray-200 text-base flex items-center cursor-pointer hover:text-white gap-1">
                         Mumbai <BiCaretDown />
                     </span>
-                    <button className="bg-red-500 text-white px-2 py-1 text-sm rounded">
+                    <button className="bg-red-500 text-white px-2 py-1 text-sm rounded hover:bg-red-700">
                         Sign in
                     </button>
                     <div className="w-8 h-8 text-white">

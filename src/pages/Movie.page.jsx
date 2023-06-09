@@ -7,12 +7,15 @@ import Slider from "react-slick";
 import { FaCcVisa, FaCcApplePay } from "react-icons/fa"
 import PosterSlider from "../components/PosterSlider/PosterSlider.Component";
 import MovieHero from "../components/MovieHero/MovieHero.Component";
+import Cast from "../components/CastAndCrew/Cast.Component";
+import Crew from "../components/CastAndCrew/Crew.Component";
 
 
 const MoviePage = () => {
   const { id } = useParams();
   const { movie, setMovie } = useContext(MovieContext);
   const [cast, setCast] = useState([]);
+  const [crew, setCrew] = useState([]);
   const [similarMovies, setSimilarMovies] = useState([]);
   const [recommendedMovies, setRecommendedMovies] = useState([]);
 
@@ -22,6 +25,15 @@ const MoviePage = () => {
       setCast(getCast.data.cast);
     };
     requestCast();
+  }, [id]);
+
+  useEffect(() => {
+    const requestCrew = async () => {
+      const getCrew = await axios.get(`/movie/${id}/credits`);
+      setCrew(getCrew.data.crew);
+      console.log(getCrew.data);
+    };
+    requestCrew();
   }, [id]);
 
   useEffect(() => {
@@ -48,7 +60,37 @@ const MoviePage = () => {
     requestMovie();
   }, [id]);
 
-  const settingCast = {};
+  const settingCast = {
+    infinite: false,
+    speed: 500,
+    slidesToShow: 6,
+    slidesToScroll: 5,
+    initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 4,
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 5,
+          slidesToScroll: 3,
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        }
+      }
+    ]
+  };
+
   const settings = {
     infinite: false,
     speed: 500,
@@ -138,7 +180,33 @@ const MoviePage = () => {
         <div className="my-8">
           <hr />
         </div>
-        {/* cast and crew slider */}
+
+        <div className="my-8">
+          <h2 className="text-gray-800 font-bold text-2xl mb-4">
+            Cast
+          </h2>
+          <Slider {...settingCast}>
+            {cast.map((castData) => (
+              <Cast image={castData.profile_path} castName={castData.original_name} role={castData.character} />
+            ))}
+          </Slider>
+        </div>
+
+        <div className="my-8">
+          <hr />
+        </div>
+
+        <div className="my-8">
+          <h2 className="text-gray-800 font-bold text-2xl mb-4">
+            Crew
+          </h2>
+          <Slider {...settingCast}>
+            {crew.map((crewData) => (
+              <Crew image={crewData.profile_path} crewName={crewData.original_name} job={crewData.job} />
+            ))}
+          </Slider>
+        </div>
+
         <div className="my-8">
           <hr />
         </div>

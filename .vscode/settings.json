@@ -1,0 +1,9 @@
+{
+    "prettier.bracketSameLine": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "json.format.enable": true,
+    "editor.formatOnSave": true,
+    "notebook.formatOnSave.enabled": true,
+    "java.format.enabled": true,
+    "html.format.enable": true
+}
